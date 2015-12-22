@@ -13,13 +13,13 @@
 
 
 listS3Files = listBucket = 
-function(name, auth = getOption("AmazonS3"), host = "s3.amazonaws.com",
+function(name, auth = getOption("AmazonS3"), host = "s3.amazonaws.com", host_bucket="http://%s.s3.amazonaws.com",
            curl = getCurlHandle(), asXML = FALSE, virtual = (tolower(name) == name))
 {
   u = if(virtual)
-         sprintf("http://%s.s3.amazonaws.com", name)
+         sprintf(host_bucket, name)
       else
-         sprintf("http://s3.amazonaws.com/%s", name)  
+         sprintf(host_bucket, name)  
 
   h = c(Date = AWSDate())
   if(virtual)
